@@ -19,6 +19,9 @@ $ node start --future
 
 ```
 
+and open browser http://localhost:4200/
+
+
 # Longpolling example
 
 ``` 
@@ -26,12 +29,10 @@ $ cd wilton_longpolling
 
 ```
 
-Дальше в файле ```config.json``` в поле ```type``` записать ```now``` или ```future``` для актуальной или прогнозируемой нагрузки.
+In ```config.json``` change ```type``` to ```now``` or ```future``` for actual or future payload.
 
 ```
 $ wilton index.js
 
 ```
-
-
-and open browser http://localhost:4200/
+and open browser http://localhost:8080/
