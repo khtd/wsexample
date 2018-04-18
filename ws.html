@@ -1,16 +1,31 @@
-<h1>
-    Web Socket Example
-</h1>
-<p>
-    open console to see connection.
-</p>
-<script>
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<title>WebSocket Test</title>
+<script language="javascript" type="text/javascript">
     var ws = new WebSocket('ws://localhost:40510');
+
     ws.onopen = function () {
-        console.log('websocket is connected ...')
+        writeToScreen('websocket is connected ...')
         ws.send('connected')
     }
     ws.onmessage = function (ev) {
-        console.log(ev);
+        writeToScreen('<span style="color: blue;">RESPONSE: ' + ev.data +'</span>');
+    }
+
+    ws.onclose = function() {
+        writeToScreen("test finished");
+    }
+
+    function writeToScreen(message) {
+        var output = document.getElementById("output"); 
+        var pre = document.createElement("p");
+        pre.style.wordWrap = "break-word";
+        pre.innerHTML = message;
+        output.appendChild(pre);
     }
 </script>
+<h1>
+    Web Socket Example
+</h1>
+
+<div id="output"></div>

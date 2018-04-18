@@ -1,5 +1,16 @@
 const express = require('express')
+const argv = require('yargs').argv
 const ws = require('./ws')
+
+var interval
+
+if(argv.now){
+  interval = 60000/15
+} else if (argv.future) {
+  interval = 60000/150
+}
+
+ws.start(interval)
 
 const app = express()
 const PORT = 4200

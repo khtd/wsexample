@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<title>WebSocket Test</title>
+<body>
+    <h1>
+        long polling Example
+    </h1>
+    
+    <div id="output"></div>
+
+    <script language="javascript" type="text/javascript">
+        var start = Date.now();
+        subscribe()
+    
+        function subscribe() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "/wilton_longpolling/view", true);
+            xhr.onload = function() {
+                writeToScreen('<span style="color: blue;">RESPONSE: ' + xhr.responseText +'</span>');
+                var delta = Date.now() - start;
+                console.log(delta)
+                console.log(new Date());
+                if(delta < 60000) {
+                    subscribe();
+                } else {
+                    writeToScreen("test finished")
+                }
+            }
+            xhr.onabort = xhr.onerror = function() {
+                writeToScreen("Disconnected")
+            }
+            xhr.send()
+        }
+    
+        function writeToScreen(message) {
+            var output = document.getElementById("output"); 
+            var pre = document.createElement("p");
+            pre.style.wordWrap = "break-word";
+            pre.innerHTML = message;
+            output.appendChild(pre);
+        }
+    </script>
+</body>
+
